@@ -60,15 +60,18 @@ with open('./_archive/NovDec_2024/ctg-studies.json', encoding='utf-8') as file:
         if studyType == 'INTERVENTIONAL' and primaryPurpose == 'TREATMENT':
             local_val_arr=[]
             status = study['protocolSection']['statusModule']['overallStatus']
+            status = status.replace('\n', ' ').replace('\r', '')
             
             if 'startDateStruct' in study['protocolSection']['statusModule']:
                 startDate = study['protocolSection']['statusModule']['startDateStruct']['date']
+                startDate = startDate.replace('\n', ' ').replace('\r', '')
             else: startDate = 'NO_START_DATE'
             
             if 'primaryCompletionDateStruct' in study['protocolSection']['statusModule']:
                 if 'date' in study['protocolSection']['statusModule']['primaryCompletionDateStruct']:
                     PrimaryCompletionDate = study['protocolSection']['statusModule']['primaryCompletionDateStruct']['date']
                     #PrimaryCompletionDateType = study['protocolSection']['statusModule']['primaryCompletionDateStruct']['type']
+                    PrimaryCompleteionDate = PrimaryCompletionDate.replace('\n', ' ').replace('\r', '')
                 else:
                     PrimaryCompletionDate = 'NOT_DEFINED';#PrimaryCompletionDateType='NOT_DEFINED'
             else: PrimaryCompletionDate = 'NOT_DEFINED';#PrimaryCompletionDateType='NOT_DEFINED'
@@ -77,12 +80,14 @@ with open('./_archive/NovDec_2024/ctg-studies.json', encoding='utf-8') as file:
                 if 'date' in study['protocolSection']['statusModule']['completionDateStruct']:
                     studyCompletionDate = study['protocolSection']['statusModule']['completionDateStruct']['date']
                     #studyCompletionDateType = study['protocolSection']['statusModule']['completionDateStruct']['type']
+                    studyCompletionDate = studyCompletionDate.replace('\n', ' ').replace('\r', '')
                 else:
                     studyCompletionDate='NOT_DEFINED';#studyCompletionDateType='NOT_DEFINED'
             else: studyCompletionDate='NOT_DEFINED';#studyCompletionDateType='NOT_DEFINED'
                     
             if 'officialTitle' in study['protocolSection']['identificationModule']:
                 studyTitle = study['protocolSection']['identificationModule']['officialTitle']
+                studyTitle = studyTitle.replace('\n', ' ').replace('\r', '')
             else: studyTitle = 'NO_OFFICIAL_TITLE'
             
             if 'descriptionModule' in study['protocolSection']:
@@ -97,8 +102,9 @@ with open('./_archive/NovDec_2024/ctg-studies.json', encoding='utf-8') as file:
             else:
                 brief_summary = 'NO_BRIEF_SUMMARY';detailed_description = 'NO_DETAILED_DESCRIPTION'
 
-            results_status = str(study['hasResults'])        
+            results_status = str(study['hasResults']);results_status = results_status.replace('\n', ' ').replace('\r', '')        
             sponsor_name = study['protocolSection']['sponsorCollaboratorsModule']['leadSponsor']['name']
+            sponsor_name = sponsor_name.replace('\n', ' ').replace('\r', '')
 
             if 'designModule' in study['protocolSection']:
                 if 'phases' in study['protocolSection']['designModule']:
@@ -108,10 +114,12 @@ with open('./_archive/NovDec_2024/ctg-studies.json', encoding='utf-8') as file:
                 if 'designInfo' in study['protocolSection']['designModule']:
                     if 'allocation' in study['protocolSection']['designModule']['designInfo']: 
                         studyAllocation = study['protocolSection']['designModule']['designInfo']['allocation']
+                        studyAllocation = studyAllocation.replace('\n', ' ').replace('\r', '')
                     else: studyAllocation = 'NO_ALLOCATION_INFO'
 
                     if 'interventionModel' in study['protocolSection']['designModule']['designInfo']:
                         interventionModel = study['protocolSection']['designModule']['designInfo']['interventionModel']
+                        interventionModel = interventionModel.replace('\n', ' ').replace('\r', '')
                     else: interventionModel = 'NO_INTERVENTION_MODEL'
                     #interventionModelDescription = study['protocolSection']['designModule']['designInfo']['interventionModelDescription']
                     if 'primaryPurpose' in study['protocolSection']['designModule']['designInfo']:
@@ -121,7 +129,7 @@ with open('./_archive/NovDec_2024/ctg-studies.json', encoding='utf-8') as file:
                 else: studyAllocation = 'NO_ALLOCATION_INFO'
             else: 
                 studyPhases='NO_PHASE_INFO';studyAllocation='NO_ALLOCATION_INFO';interventionModel='NO_INTERVENTION_MODEL';primaryPurpose = 'NO_PRIMARY_PURPOSE'        
-
+                       
             if 'conditionsModule' in study['protocolSection']:
                 conditions = study['protocolSection']['conditionsModule']['conditions'];
                 if 'keywords' in study['protocolSection']['conditionsModule']:
@@ -140,9 +148,11 @@ with open('./_archive/NovDec_2024/ctg-studies.json', encoding='utf-8') as file:
                 else: genderBased = 'NOT_PROVIDED'
                 if 'studyPopulation' in study['protocolSection']['eligibilityModule']:
                     studyPopulation = study['protocolSection']['eligibilityModule']['studyPopulation']
+                    studyPopulation = studyPopulation.replace('\n', ' ').replace('\r', '')
                 else: studyPopulation = 'NO_POPULATION_INFO'
                 if 'samplingMethod' in study['protocolSection']['eligibilityModule']:
                     samplingMethod = study['protocolSection']['eligibilityModule']['samplingMethod']
+                    samplingMethod = samplingMethod.replace('\n', ' ').replace('\r', '')
                 else: samplingMethod = 'NO_SAMPLING_INFO'
             else: eligibilityCriteria = 'NO_ELIGIBILITY_CRITERIA';genderBased = 'NOT_PROVIDED';studyPopulation = 'NO_POPULATION_INFO';samplingMethod = 'NO_SAMPLING_INFO'
 
@@ -231,6 +241,7 @@ with open('./_archive/NovDec_2024/ctg-studies.json', encoding='utf-8') as file:
                 if 'moreInfoModule' in study['resultsSection']:
                     if 'limitationsAndCaveats' in study['resultsSection']['moreInfoModule']:
                         LnC_description = study['resultsSection']['moreInfoModule']['limitationsAndCaveats']['description']
+                        LnC_description = LnC_description.replace('\n', ' ').replace('\r', '')
                     else: LnC_description = 'NO_DESCRIPTION_AVAILABLE'
                 else:
                     LnC_description = 'NO_DESCRIPTION_AVAILABLE'
